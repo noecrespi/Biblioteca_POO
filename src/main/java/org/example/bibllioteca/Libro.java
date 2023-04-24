@@ -17,7 +17,7 @@ public class Libro {
     String autor;
     String editorial;
     int copias;
-    int copiasDisponibles;
+    int librosDisponibles;
 
     int contadorLibros = 0;
 
@@ -25,13 +25,13 @@ public class Libro {
     //Constructor
     public Libro(){}
 
-    public Libro(int IBNS, String titulo, String autor, String editorial, int copias, int copiasDisponibles) {
+    public Libro(int IBNS, String titulo, String autor, String editorial, int copias, int librosDisponibles) {
         this.IBNS = IBNS;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.copias = copias;
-        this.copiasDisponibles = copiasDisponibles;
+        this.librosDisponibles = librosDisponibles;
     }
 
     //get y set
@@ -75,12 +75,12 @@ public class Libro {
         this.copias = copias;
     }
 
-    public int getCopiasDisponibles() {
-        return copiasDisponibles;
+    public int getlibrosDisponibles() {
+        return librosDisponibles;
     }
 
-    public void setCopiasDisponibles(int copiasDisponibles) {
-        this.copiasDisponibles = copiasDisponibles;
+    public void setlibrosDisponibles(int librosDisponibles) {
+        this.librosDisponibles = librosDisponibles;
     }
 
     // contador de libros iguales
@@ -109,9 +109,9 @@ public class Libro {
         System.out.println("Introduce el numero de copias del libro");
         int copias = sc.nextInt();
         System.out.println("Introduce el numero de copias disponibles del libro");
-        int copiasDisponibles = sc.nextInt();
+        int librosDisponibles = sc.nextInt();
 
-        Libro libro = new Libro(IBNS, titulo, autor, editorial, copias, copiasDisponibles);
+        Libro libro = new Libro(IBNS, titulo, autor, editorial, copias, librosDisponibles);
         libros.add(libro);
     }
 
@@ -129,7 +129,6 @@ public class Libro {
     }
 
     // Buscar libro por ISBN
-
     public static Libro buscarLibroISBN(ArrayList<Libro> libros){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el ISBN del libro");
@@ -142,7 +141,6 @@ public class Libro {
         //}
         // hacer con stream
         return libros.stream().filter(libro -> libro.getIBNS() == IBNS).findFirst().orElse(null);
-
     }
 
     // Buscar libro por titulo
@@ -158,15 +156,10 @@ public class Libro {
         }
     }
 
-
-
-
-
-
     //toString
     @Override
     public String toString() {
-        return "Libro{" + "IBNS=" + IBNS + ", titulo=" + titulo + ", autor=" + autor + ", editorial=" + editorial + ", copias=" + copias + ", copiasDisponibles=" + copiasDisponibles + '}';
+        return "Libro{" + "IBNS=" + IBNS + ", titulo=" + titulo + ", autor=" + autor + ", editorial=" + editorial + ", copias=" + copias + ", librosDisponibles=" + librosDisponibles + '}';
     }
 
     //Constructor copia
@@ -176,6 +169,6 @@ public class Libro {
         this.autor = libro.autor;
         this.editorial = libro.editorial;
         this.copias = libro.copias;
-        this.copiasDisponibles = libro.copiasDisponibles;
+        this.librosDisponibles = libro.librosDisponibles;
     }
 }
