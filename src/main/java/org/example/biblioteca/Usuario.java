@@ -2,6 +2,8 @@ package org.example.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Usuario {
     //Una clase llamada Usuario. Concretamente debemos almacenar: nombre, apellidos, NIF, contraseña. Para esta clase
@@ -21,9 +23,12 @@ public class Usuario {
     static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
     // Constructor
-    public Usuario(){};
+    public Usuario() {
+    }
 
-    public Usuario(String nombre, String apellidos, String nif, String contrasenya){
+    ;
+
+    public Usuario(String nombre, String apellidos, String nif, String contrasenya) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.nif = nif;
@@ -59,7 +64,13 @@ public class Usuario {
         return contrasenya;
     }
 
-    public static void addUsuario(ArrayList<Usuario> usuarios){
+    public String getContraCifrada() {
+        return IntStream.range(0, this.contrasenya.length())
+                .mapToObj(i -> "*")
+                .collect(Collectors.joining());
+    }
+
+    public static void addUsuario(ArrayList<Usuario> usuarios) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el nombre del usuario: ");
         String nombre = sc.nextLine();
@@ -70,16 +81,6 @@ public class Usuario {
         System.out.println("Introduce la contraseña del usuario: ");
         String contrasenya = sc.nextLine();
         controlContrasenya(contrasenya);
-        /*boolean contrasenyaCorrecta = false;
-        while (!contrasenyaCorrecta){
-            if (contrasenya.length() < 8){
-                System.out.println("La contraseña debe tener al menos 8 caracteres.");
-                System.out.println("Introduce la contraseña del usuario: ");
-                contrasenya = sc.nextLine();
-            } else {
-                contrasenyaCorrecta = true;
-            }
-        }*/
         Usuario usuario = new Usuario(nombre, apellidos, nif, contrasenya);
         usuarios.add(usuario);
     }
@@ -89,38 +90,32 @@ public class Usuario {
     }
 
     // Control de la contraseña
-    public static void controlContrasenya(String contrasenya){
-        boolean contrasenyaCorrecta = false;
-
-        if (contrasenya.length() < 8){
-            while (!contrasenyaCorrecta) {
-                System.out.println("La contraseña debe tener al menos 8 caracteres.");
-                System.out.println("Introduce la contraseña del usuario: ");
-                Scanner sc = new Scanner(System.in);
-                contrasenya = sc.nextLine();
-            }
-        } else {
-            contrasenyaCorrecta = true;
+    public static void controlContrasenya(String contrasenya) {
+        while (contrasenya.length() < 8) {
+            System.out.println("La contraseña debe tener al menos 8 caracteres.");
+            System.out.println("Introduce la contraseña del usuario: ");
+            Scanner sc = new Scanner(System.in);
+            contrasenya = sc.nextLine();
         }
     }
 
-    public static void eliminarUsuario(ArrayList<Usuario> usuarios){
+    public static void eliminarUsuario(ArrayList<Usuario> usuarios, String deleteNif) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el NIF del usuario que quieres eliminar: ");
         String nif = sc.nextLine();
         //stream
-        usuarios.removeIf(usuario -> usuario.getNif().equals(nif)) ;
-        }
+        usuarios.removeIf(usuario -> usuario.getNif().equals(nif));
+    }
 
 
-    public static void listUsuarios(ArrayList<Usuario> usuarios){
+    public static void listUsuarios(ArrayList<Usuario> usuarios) {
         for (Usuario usuario : usuarios) {
             System.out.println(usuario);
         }
     }
 
     // Constructor copia
-    public Usuario(Usuario usuario){
+    public Usuario(Usuario usuario) {
         this.nombre = usuario.nombre;
         this.apellidos = usuario.apellidos;
         this.nif = usuario.nif;
@@ -134,7 +129,8 @@ public class Usuario {
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", nif='" + nif + '\'' +
-                ", contraseña='" + contrasenya + '\'' +
+                ", contraseña= " + getContraCifrada() + '\'' +
+                //", contraseña='" + contrasenya + '\'' +
                 '}';
     }
 }

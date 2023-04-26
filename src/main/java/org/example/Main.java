@@ -3,6 +3,7 @@ package org.example;
 import org.example.biblioteca.Biblioteca;
 import org.example.biblioteca.Libro;
 import org.example.biblioteca.Persona;
+import org.example.biblioteca.Usuario;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,67 +23,68 @@ public class Main {
         Biblioteca biblioteca = new Biblioteca();
         ArrayList<Libro> libros = new ArrayList<Libro>();
         ArrayList<Persona> listaPersonal = new ArrayList<Persona>();
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
         Scanner sc = new Scanner(System.in);
         int opcion;
 
         do {
-            System.out.println( "|     MENÚ BIBLIOTECA              |\n" +
-                                "\n" +
-                                "|     1. Libros                    |\n" +
-                                "|     2. Persona                   |\n" +
-                                "\n" +
-                                "|     0.Salir                      |\n");
+            System.out.println("|     MENÚ BIBLIOTECA              |\n" +
+                    "\n" +
+                    "|     1. Libros                    |\n" +
+                    "|     2. Persona                   |\n" +
+                    "|     3. Usuario                   |\n" +
+                    "\n" +
+                    "|     0.Salir                      |\n");
 
             opcion = sc.nextInt();
 
-
+            //boolean salir = true;
+            //while (true) {
             switch (opcion) {
-                    case 1:
-                        do {
-                            boolean salir = true;
-                            //while (salir) {
-                            System.out.println("|     MENÚ BIBLIOTECA              |\n" +
-                                    "\n" +
-                                    "|        LIBROS                    |\n" +
-                                    "|     1.Añadir libro               |\n" +
-                                    "|     2.Eliminar libro             |\n" +
-                                    "|     3.Buscar libro por ISBN      |\n" +
-                                    "|     4.Buscar libro por titulo    |\n" +
-                                    "|     5.Mostrar libros             |\n" +
-                                    "|     6.Mostrar libros disponibles |\n" +
-                                    "\n" +
-                                    "|     7.Volver al menú principal   |\n" +
-                                    "|     0.Salir                      |\n");
-                                System.out.println("Introduce una opción : ");
-                                opcion = sc.nextInt();
+                case 1:
+                    do {
+                        System.out.println("|     MENÚ BIBLIOTECA              |\n" +
+                                "\n" +
+                                "|        LIBROS                    |\n" +
+                                "|     1.Añadir libro               |\n" +
+                                "|     2.Eliminar libro             |\n" +
+                                "|     3.Buscar libro por ISBN      |\n" +
+                                "|     4.Buscar libro por titulo    |\n" +
+                                "|     5.Mostrar libros             |\n" +
+                                "|     6.Mostrar libros disponibles |\n" +
+                                "\n" +
+                                "|     7.Volver al menú principal   |\n" +
+                                "|     0.Salir                      |\n");
+                        System.out.println("Introduce una opción : ");
+                        opcion = sc.nextInt();
 
-                            //int opcionLibro = sc.nextInt();
-                            switch (opcion) {
-                                case 1:
-                                    Libro.addLibro(libros);
-                                    break;
-                                case 2:
-                                    Libro.eliminarLibro(libros);
-                                    break;
-                                case 3:
-                                    Libro.buscarLibroISBN(libros);
-                                    break;
-                                case 4:
-                                    Libro.buscarLibroTitulo(libros);
-                                    break;
-                                case 5:
-                                    biblioteca.mostrarLibros(libros);
-                                    break;
-                                case 6:
-                                    biblioteca.mostrarLibrosDisponibles(libros);
-                                    break;
-                                case 0:
-                                    break;
-                                default:
-                                    System.out.println("Opción incorrecta");
-                                    break;
-                            }
+                        //int opcionLibro = sc.nextInt();
+                        switch (opcion) {
+                            case 1:
+                                Libro.addLibro(libros);
+                                break;
+                            case 2:
+                                Libro.eliminarLibro(libros);
+                                break;
+                            case 3:
+                                Libro.buscarLibroISBN(libros);
+                                break;
+                            case 4:
+                                Libro.buscarLibroTitulo(libros);
+                                break;
+                            case 5:
+                                biblioteca.mostrarLibros(libros);
+                                break;
+                            case 6:
+                                biblioteca.mostrarLibrosDisponibles(libros);
+                                break;
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Opción incorrecta");
+                                break;
+                        }
                         //}
                         break;
                     } while (opcion != 0);
@@ -90,14 +92,14 @@ public class Main {
 
                 case 2:
                     do {
-                        System.out.println( "|         MENÚ BIBLIOTECA          |\n" +
-                                            "\n" +
-                                            "|             PERSONA              |\n" +
-                                            "|     1. Crear persona             |\n" +
-                                            "|     2.Eliminar persona           |\n" +
-                                            "|     3.Buscar persona por DNI     |\n" +
-                                            "\n" +
-                                            "|     0.Salir                      |\n");
+                        System.out.println("|         MENÚ BIBLIOTECA          |\n" +
+                                "\n" +
+                                "|             PERSONA              |\n" +
+                                "|     1. Crear persona             |\n" +
+                                "|     2.Eliminar persona           |\n" +
+                                "|     3.Buscar persona por DNI     |\n" +
+                                "\n" +
+                                "|     0.Salir                      |\n");
 
                         opcion = sc.nextInt();
                         //ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
@@ -136,7 +138,43 @@ public class Main {
                             default:
                                 System.out.println("Opción incorrecta");
                         }
-            } while (opcion != 0);
+                    } while (opcion != 0);
+                    break;
+                case 3:
+                    do {
+                        System.out.println("""
+                                |         MENÚ BIBLIOTECA          |
+
+                                |             USUARIO              |
+                                |     1. Crear usuario             |
+                                |     2. Eliminar usuario          |
+                                |     3. Lista de usuarios         |
+
+                                |     0.Salir                      |
+                                """);
+
+                        opcion = sc.nextInt();
+                        //ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
+                        switch (opcion) {
+
+                            case 1:
+                                Usuario.addUsuario(usuarios);
+                                break;
+                            case 2:
+                                Scanner sc3 = new Scanner(System.in);
+                                System.out.println("Introduce el dni de la persona que quieres eliminar");
+                                String deleteNif = sc3.nextLine();
+                                Usuario.eliminarUsuario(usuarios, deleteNif);
+                                break;
+                            case 3:
+                                Usuario.listUsuarios(usuarios);
+                                break;
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Opción incorrecta");
+                        }
+                    } while (opcion != 0);
                     break;
                 case 0:
                     break;
@@ -144,6 +182,8 @@ public class Main {
                     System.out.println("Opción incorrecta");
             }
         } while (opcion != 0);
+        //}
+        //while (opcion != 0);
 
 
     }
