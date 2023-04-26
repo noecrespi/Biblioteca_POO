@@ -129,7 +129,7 @@ public class Libro {
     }
 
     // Buscar libro por ISBN
-    public static Libro buscarLibroISBN(ArrayList<Libro> libros){
+    public static  Libro buscarLibroISBN(ArrayList<Libro> libros){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el ISBN del libro");
         int IBNS = sc.nextInt();
@@ -140,7 +140,10 @@ public class Libro {
         //    }
         //}
         // hacer con stream
-        return libros.stream().filter(libro -> libro.getIBNS() == IBNS).findFirst().orElse(null);
+        Libro findlibro =  libros.stream()
+                .filter(libro -> libro.getIBNS() == IBNS).findFirst().orElse(null);
+        System.out.println(findlibro);
+        return findlibro;
     }
 
     // Buscar libro por titulo

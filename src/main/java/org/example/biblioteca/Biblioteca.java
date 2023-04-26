@@ -13,19 +13,16 @@ public class Biblioteca {
     //
 
     String nombreBiblioteca;
-    ArrayList<Libro> listaLibros = new ArrayList<Libro>();
+    ArrayList<Libro> libros = new ArrayList<Libro>();
     ArrayList<Persona> listaPersonal = new ArrayList<Persona>();
 
-    //instancia
-    Biblioteca bibliotecaPalma = new Biblioteca("biblioteca Palma", listaLibros, listaPersonal);
-    //Biblioteca bibliotecaInca = new Biblioteca("biblioteca Inca", listaLibros, listaPersonal);
 
     // Constructor
     public Biblioteca(){};
 
     public Biblioteca(String nombreBiblioteca, ArrayList<Libro> listaLibros, ArrayList<Persona> listaPersonal){
         this.nombreBiblioteca = nombreBiblioteca;
-        this.listaLibros = listaLibros;
+        this.libros = libros;
         this.listaPersonal = listaPersonal;
     }
 
@@ -40,12 +37,12 @@ public class Biblioteca {
         this.nombreBiblioteca = nombreBiblioteca.substring(0, 1).toUpperCase() + nombreBiblioteca.substring(1);
     }
 
-    public ArrayList<Libro> getListaLibros() {
-        return listaLibros;
+    public ArrayList<Libro> getLibros() {
+        return libros;
     }
 
-    public void setListaLibros(ArrayList<Libro> listaLibros) {
-        this.listaLibros = listaLibros;
+    public void setlibros(ArrayList<Libro> libros) {
+        this.libros = libros;
     }
 
     public ArrayList<Persona> getListaPersonal() {
@@ -59,20 +56,20 @@ public class Biblioteca {
     // constructor copia
     public Biblioteca(Biblioteca biblioteca){
         this.nombreBiblioteca = biblioteca.nombreBiblioteca;
-        this.listaLibros = biblioteca.listaLibros;
+        this.libros = biblioteca.libros;
         this.listaPersonal = biblioteca.listaPersonal;
     }
 
-    public void mostrarLibros(ArrayList<Libro> listaLibros){
-        listaLibros.stream().forEach(System.out::println);
+    public void mostrarLibros(ArrayList<Libro> libros){
+        libros.stream().forEach(System.out::println);
     }
 
-    public void mostrarLibrosDisponibles(ArrayList<Libro> listaLibros){
+    public void mostrarLibrosDisponibles(ArrayList<Libro> libros){
 
-        long isLibros = listaLibros.stream().filter(libro -> libro.getlibrosDisponibles() >0 ).count();
+        long isLibros = libros.stream().filter(libro -> libro.getlibrosDisponibles() >0 ).count();
 
         if ( isLibros > 0){
-            listaLibros.stream().filter(libro -> libro.getlibrosDisponibles() >0 ).forEach(System.out::println);
+            libros.stream().filter(libro -> libro.getlibrosDisponibles() >0 ).forEach(System.out::println);
         } else {
             System.out.println("No hay libros disponibles");
         }
@@ -85,7 +82,7 @@ public class Biblioteca {
     public String toString() {
         return "Biblioteca{" +
                 "nombreBiblioteca='" + nombreBiblioteca + '\'' +
-                ", listaLibros=" + listaLibros +
+                ", libros=" + libros +
                 ", listaPersonal=" + listaPersonal +
                 '}';
     }

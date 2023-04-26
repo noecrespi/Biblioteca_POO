@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
-
 public class Persona {
     // Una clase llamada Persona. Concretamente debemos almacenar: nombre, apellidos, NIF, contraseña. Para esta
     // clase debes crear constructor con todos los parámetros, constructor copia, toString, getters/settersy un control
@@ -16,8 +14,8 @@ public class Persona {
     String dni;
     String contrasenya;
 
-    Biblioteca biblioteca = new Biblioteca();
-    ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
+    static Biblioteca biblioteca = new Biblioteca();
+    static ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
 
     // Constructor
     public Persona(){};
@@ -72,7 +70,7 @@ public class Persona {
     }
 
     // añadir persona
-    public void crearPersona(){
+    public static void crearPersona(ArrayList<Persona> listaPersonal){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el nombre de la persona");
         String nombre = sc.nextLine();
@@ -82,19 +80,32 @@ public class Persona {
         String dni = sc.nextLine();
         System.out.println("Introduce la contraseña de la persona");
         String contrasenya = sc.nextLine();
-        Persona newPersona = new Persona(nombre, apellidos, dni, contrasenya);
-        listaPersonal.add(newPersona);
-    };
-    public void addPersona(Persona persona){
-        crearPersona();
+        Persona newPersona1 = new Persona(nombre, apellidos, dni, contrasenya);
+        listaPersonal.add(newPersona1);
     };
 
-    public void eliminarPersona(Persona persona){
-        Scanner sc = new Scanner(System.in);
+
+    public static void eliminarPersona(ArrayList<Persona> listaPersonal, String deleteDni){
+        /*Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el dni de la persona que quieres eliminar");
-        String din = sc.nextLine();
-        listaPersonal.remove(persona);
+        String din = sc.nextLine();*/
+        listaPersonal.removeIf(persona -> persona.getDni().equals(deleteDni));
+        //listaPersonal.remove(persona);
     };
+
+    // buscar persona
+    public static Persona findPersona(ArrayList<Persona> listaPersonal, String findDni){
+        /*Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el DNI de la persona que quieres buscar:");
+        String dni = sc.nextLine();*/
+        Persona persona1 =  listaPersonal.stream()
+                .filter(persona -> persona.getDni().equals(findDni))
+                .findFirst()
+                .orElse(null);
+        System.out.println(persona1);
+        return persona1;
+    }
+
 
     // to string
     @Override
