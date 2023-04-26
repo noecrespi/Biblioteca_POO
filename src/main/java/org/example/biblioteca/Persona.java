@@ -1,4 +1,10 @@
-package org.example.bibllioteca;
+package org.example.biblioteca;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
 
 public class Persona {
     // Una clase llamada Persona. Concretamente debemos almacenar: nombre, apellidos, NIF, contraseña. Para esta
@@ -10,6 +16,9 @@ public class Persona {
     String dni;
     String contrasenya;
 
+    Biblioteca biblioteca = new Biblioteca();
+    ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
+
     // Constructor
     public Persona(){};
 
@@ -19,9 +28,8 @@ public class Persona {
         this.dni = dni;
         this.contrasenya = contrasenya;
     }
+
     // Get y set
-
-
     public String getNombre() {
         return nombre;
     }
@@ -46,22 +54,47 @@ public class Persona {
         this.dni = dni;
     }
 
-    public String getContraseña() {
+    public String getContrasenya() {
         return contrasenya;
     }
 
-    public void setContraseña(String contrasenya) {
+    public void setContrasenya(String contrasenya) {
         this.contrasenya = contrasenya;
     }
 
-    // comprovar que la contraseña tenga una longitud de 8 aaccteres
-    public String comprovarContra(){
+    // comprobar que la contraseña tenga una longitud de 8 aaccteres
+    public boolean comprobarContra(){
         if (contrasenya.length() < 8){
-            return "La contraseña debe tener al menos 8 caracteres";
+            return true;
         }else{
-            return "La contraseña es correcta";
+            return false;
         }
     }
+
+    // añadir persona
+    public void crearPersona(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el nombre de la persona");
+        String nombre = sc.nextLine();
+        System.out.println("Introduce los apellidos de la persona");
+        String apellidos = sc.nextLine();
+        System.out.println("Introduce el dni de la persona");
+        String dni = sc.nextLine();
+        System.out.println("Introduce la contraseña de la persona");
+        String contrasenya = sc.nextLine();
+        Persona newPersona = new Persona(nombre, apellidos, dni, contrasenya);
+        listaPersonal.add(newPersona);
+    };
+    public void addPersona(Persona persona){
+        crearPersona();
+    };
+
+    public void eliminarPersona(Persona persona){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el dni de la persona que quieres eliminar");
+        String din = sc.nextLine();
+        listaPersonal.remove(persona);
+    };
 
     // to string
     @Override

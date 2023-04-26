@@ -1,4 +1,4 @@
-package org.example.bibllioteca;
+package org.example.biblioteca;
 
 
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class Libro {
     }
 
     // Añadir libro
-    public static void añadirLibro(ArrayList<Libro> libros){
+    public static void addLibro(ArrayList<Libro> libros){
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce el ISBN del libro");
         int IBNS = sc.nextInt();

@@ -1,4 +1,4 @@
-package org.example.bibllioteca;
+package org.example.biblioteca;
 
 import java.util.ArrayList;
 
@@ -14,11 +14,11 @@ public class Biblioteca {
 
     String nombreBiblioteca;
     ArrayList<Libro> listaLibros = new ArrayList<Libro>();
-    ArrayList<Persona> listaPersonal = new ArrayList<Pesona>();
+    ArrayList<Persona> listaPersonal = new ArrayList<Persona>();
 
     //instancia
     Biblioteca bibliotecaPalma = new Biblioteca("biblioteca Palma", listaLibros, listaPersonal);
-    Biblioteca bibliotecaInca = new Biblioteca("biblioteca Inca", listaLibros, listaPersonal);
+    //Biblioteca bibliotecaInca = new Biblioteca("biblioteca Inca", listaLibros, listaPersonal);
 
     // Constructor
     public Biblioteca(){};
@@ -37,8 +37,7 @@ public class Biblioteca {
 
     public void setNombreBiblioteca(String nombreBiblioteca) {
         // biblioteca empiece en mayúsculas
-        nombreBiblioteca = nombreBiblioteca.substring(0, 1).toUpperCase() + nombreBiblioteca.substring(1);
-        this.nombreBiblioteca = nombreBiblioteca;
+        this.nombreBiblioteca = nombreBiblioteca.substring(0, 1).toUpperCase() + nombreBiblioteca.substring(1);
     }
 
     public ArrayList<Libro> getListaLibros() {
