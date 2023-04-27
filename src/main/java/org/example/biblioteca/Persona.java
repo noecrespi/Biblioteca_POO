@@ -5,26 +5,30 @@ import java.util.Scanner;
 
 
 public class Persona {
-    // Una clase llamada Persona. Concretamente debemos almacenar: nombre, apellidos, NIF, contraseña. Para esta
-    // clase debes crear constructor con todos los parámetros, constructor copia, toString, getters/settersy un control
-    // de la contraseña que debe tener al menos 8 caracteres. Crea los métodos que consideres oportunos para poder
-    // añadir/eliminar personas que gestionarán la biblioteca (bibliotecarios).
-    String nombre;
-    String apellidos;
-    String dni;
-    String contrasenya;
 
-    static Biblioteca biblioteca = new Biblioteca();
-    static ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
+    //Desarrolla la clase Persona. Se caracteriza por: nombre, apellido1, apellido2, edad. Crea constructor vacío,
+    // todos los parámetros, copia, getters/setters y toString.
+
+    String nombre;
+    String apellido1;
+    String apellido2;
+    String edad;
 
     // Constructor
+    //tiene tres constructores ya que la persona puede que no tenga segundo apellido
     public Persona(){};
 
-    public Persona(String nombre, String apellidos, String dni, String contrasenya){
+    public Persona(String nombre, String apellido1, String apellido2, String edad){
         this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dni = dni;
-        this.contrasenya = contrasenya;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.edad = edad;
+    }
+
+    public Persona(String nombre, String apellido1, String edad){
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.edad = edad;
     }
 
     // Get y set
@@ -36,94 +40,49 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido1() {
+        return apellido1;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
     }
 
-    public String getDni() {
-        return dni;
+    public String getApellido2() {
+        return apellido2;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
     }
 
-    public String getContrasenya() {
-        return contrasenya;
+    public String getEdad() {
+        return edad;
     }
 
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
+    public void setEdad(String edad) {
+        this.edad = edad;
     }
 
-    // comprobar que la contraseña tenga una longitud de 8 aaccteres
-    public boolean comprobarContra(){
-        if (contrasenya.length() < 8){
-            return true;
-        }else{
-            return false;
-        }
+    //Constructor copia
+    public Persona(Persona persona){
+        this.nombre = persona.nombre;
+        this.apellido1 = persona.apellido1;
+        this.apellido2 = persona.apellido2;
+        this.edad = persona.edad;
     }
 
-    // añadir persona
-    public static void crearPersona(ArrayList<Persona> listaPersonal){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el nombre de la persona");
-        String nombre = sc.nextLine();
-        System.out.println("Introduce los apellidos de la persona");
-        String apellidos = sc.nextLine();
-        System.out.println("Introduce el dni de la persona");
-        String dni = sc.nextLine();
-        System.out.println("Introduce la contraseña de la persona");
-        String contrasenya = sc.nextLine();
-        Persona newPersona1 = new Persona(nombre, apellidos, dni, contrasenya);
-        listaPersonal.add(newPersona1);
-    };
-
-
-    public static void eliminarPersona(ArrayList<Persona> listaPersonal, String deleteDni){
-        /*Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el dni de la persona que quieres eliminar");
-        String din = sc.nextLine();*/
-        listaPersonal.removeIf(persona -> persona.getDni().equals(deleteDni));
-        //listaPersonal.remove(persona);
-    };
-
-    // buscar persona
-    public static Persona findPersona(ArrayList<Persona> listaPersonal, String findDni){
-        /*Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el DNI de la persona que quieres buscar:");
-        String dni = sc.nextLine();*/
-        Persona persona1 =  listaPersonal.stream()
-                .filter(persona -> persona.getDni().equals(findDni))
-                .findFirst()
-                .orElse(null);
-        System.out.println(persona1);
-        return persona1;
-    }
-
-
-    // to string
+    //to String
     @Override
     public String toString() {
         return "Persona{" +
                 "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", dni='" + dni + '\'' +
-                ", contraseña='" + contrasenya + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", edad='" + edad + '\'' +
                 '}';
     }
 
-    // Constructor copia
-    public Persona(Persona persona){
-        this.nombre = persona.nombre;
-        this.apellidos = persona.apellidos;
-        this.dni = persona.dni;
-        this.contrasenya = persona.contrasenya;
-    }
+
 
 }

@@ -6,14 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Usuario {
-    //Una clase llamada Usuario. Concretamente debemos almacenar: nombre, apellidos, NIF, contraseña. Para esta clase
-    // debes crear constructor con todos los parámetros, constructor copia, toString, getters/setters y un control de
-    // la contraseña que debe tener al menos 8 caracteres. Crea los métodos que consideres oportunos para poder
-    // añadir/eliminar usuarios a la biblioteca.
-    //Al incluir los usuarios serán estos los que reserven los libros. Piensa, que actualmente un usuario no puede
-    // reservar un libro si el usuario tiene más de 5 libros reservados, previamente tiene que devolverlos, por tanto,
-    // tu programa debe permitir la reserva y devolución de libros, así como listado de reservas realizadas por un
-    // usuario de la biblioteca.
+    //Desarrolla la clase Usuario. Heredará los atributos anteriores, pero además deseamos almacenar su teléfono,
+    // dirección, código postal, correo electrónico y lista de Reservas. Crea constructor vacío, todos los parámetros
+    // (incluidos los de la superclase), copia, getters/setters y toString (que imprimirá también los datos de la
+    // superclase).
+
 
     String nombre;
     String apellidos;
