@@ -1,133 +1,114 @@
 package org.example.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class Usuario {
+public class Usuario extends Persona {
     //Desarrolla la clase Usuario. Heredará los atributos anteriores, pero además deseamos almacenar su teléfono,
     // dirección, código postal, correo electrónico y lista de Reservas. Crea constructor vacío, todos los parámetros
     // (incluidos los de la superclase), copia, getters/setters y toString (que imprimirá también los datos de la
     // superclase).
 
-
-    String nombre;
-    String apellidos;
-    String nif;
-    String contrasenya;
-
-    static ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    int telefono;
+    String direccion;
+    int codigoPostal;
+    String correoElectronico;
+    ArrayList<Reserva> reservas = new ArrayList<>();
 
     // Constructor
-    public Usuario() {
+    public Usuario(){};
+
+    public Usuario(String nombre, String apellido1, String apellido2, String edad, int telefono, String direccion,
+                    int codigoPostal, String correoElectronico){
+        super(nombre, apellido1, apellido2, edad);
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.codigoPostal = codigoPostal;
+        this.correoElectronico = correoElectronico;
     }
-
-    ;
-
-    public Usuario(String nombre, String apellidos, String nif, String contrasenya) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.nif = nif;
-        this.contrasenya = contrasenya;
+    public Usuario(String nombre, String apellido1, String edad, int telefono, String direccion,
+                    int codigoPostal, String correoElectronico){
+        super(nombre, apellido1, edad);
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.codigoPostal = codigoPostal;
+        this.correoElectronico = correoElectronico;
     }
 
     // Get y set
-    public String getNombre() {
-        return nombre;
+    public int getTelefono() {
+        return telefono;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public String getNif() {
-        return nif;
+    public int getCodigoPostal() {
+        return codigoPostal;
     }
 
-    public void setNif(String nif) {
-        this.nif = nif;
+    public void setCodigoPostal(int codigoPostal) {
+        this.codigoPostal = codigoPostal;
     }
 
-    public String getContrasenya() {
-        return contrasenya;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public String getContraCifrada() {
-        return IntStream.range(0, this.contrasenya.length())
-                .mapToObj(i -> "*")
-                .collect(Collectors.joining());
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
-    public static void addUsuario(ArrayList<Usuario> usuarios) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el nombre del usuario: ");
-        String nombre = sc.nextLine();
-        System.out.println("Introduce los apellidos del usuario: ");
-        String apellidos = sc.nextLine();
-        System.out.println("Introduce el NIF del usuario: ");
-        String nif = sc.nextLine();
-        System.out.println("Introduce la contraseña del usuario: ");
-        String contrasenya = sc.nextLine();
-        controlContrasenya(contrasenya);
-        Usuario usuario = new Usuario(nombre, apellidos, nif, contrasenya);
-        usuarios.add(usuario);
+    public ArrayList<Reserva> getReservas() {
+        return reservas;
     }
 
-    public void setContrasenya(String contrasenya) {
-        this.contrasenya = contrasenya;
+    public void setReservas(ArrayList<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
-    // Control de la contraseña
-    public static void controlContrasenya(String contrasenya) {
-        while (contrasenya.length() < 8) {
-            System.out.println("La contraseña debe tener al menos 8 caracteres.");
-            System.out.println("Introduce la contraseña del usuario: ");
-            Scanner sc = new Scanner(System.in);
-            contrasenya = sc.nextLine();
+    public boolean isCorrectCP(int codigoPostal){
+        if (String.valueOf(codigoPostal).length() == 5){
+            return true;
+        }else{
+            return false;
         }
     }
 
-    public static void eliminarUsuario(ArrayList<Usuario> usuarios, String deleteNif) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Introduce el NIF del usuario que quieres eliminar: ");
-        String nif = sc.nextLine();
-        //stream
-        usuarios.removeIf(usuario -> usuario.getNif().equals(nif));
+    //Constructor copia
+    public Usuario(Usuario usuario){
+        super(usuario.getNombre(),
+                usuario.getApellido1(),
+                usuario.getApellido2(),
+                usuario.getEdad());
+        this.telefono = usuario.getTelefono();
+        this.direccion = usuario.getDireccion();
+        this.codigoPostal = usuario.getCodigoPostal();
+        this.correoElectronico = usuario.getCorreoElectronico();
+        this.reservas = usuario.getReservas();
     }
 
-
-    public static void listUsuarios(ArrayList<Usuario> usuarios) {
-        for (Usuario usuario : usuarios) {
-            System.out.println(usuario);
-        }
-    }
-
-    // Constructor copia
-    public Usuario(Usuario usuario) {
-        this.nombre = usuario.nombre;
-        this.apellidos = usuario.apellidos;
-        this.nif = usuario.nif;
-        this.contrasenya = usuario.contrasenya;
-    }
-
-    // toString
+    //toString
     @Override
     public String toString() {
         return "Usuario{" +
                 "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", nif='" + nif + '\'' +
-                ", contraseña= " + getContraCifrada() + '\'' +
-                //", contraseña='" + contrasenya + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", edad='" + edad + '\'' +
+                ", telefono=" + telefono +
+                ", direccion='" + direccion + '\'' +
+                ", codigoPostal=" + codigoPostal +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", reservas=" + reservas +
                 '}';
     }
 }
