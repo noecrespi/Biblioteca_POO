@@ -8,13 +8,17 @@ public class Biblioteca {
     // personal que gestiona la biblioteca. Para esta clase debes crear constructor vacío, constructor con todos los
     // parámetros, constructor copia, toString, getters/setters. Debe haber un control en el setter de manera que el
     // nombre de la biblioteca empiece en mayúsculas.
-    // Mostrar libros. Imprimirá por pantalla toda la lista de libros. (método instancia)
-    // Mostrar libros disponibles. Solo imprime la lista de los libros disponibles. (método instancia)
-    //
+
+    //Teniendo en cuenta lo anterior debemos tener en cuenta que ahora la clase Biblioteca tendrá una lista de tipo
+    // Persona, y en el que se almacenará tanto Usuarios como Bibliotecarios. Crea un método llamado solicitarDatosPersona
+    // de la clase Persona, que pide los datos y devuelve una Persona los va actualizando en la propia instancia que
+    // utiliza este método. Este método será sobreescrito por las clases hijas, de manera que además de hacer lo que
+    // hace el método de la clase padre, incluirá la solicitud de datos de las clases hijas.
+
 
     String nombreBiblioteca;
     ArrayList<Libro> libros = new ArrayList<Libro>();
-    ArrayList<Persona> listaPersonal = new ArrayList<Persona>();
+    ArrayList<Persona> personas = new ArrayList<Persona>();
 
 
     // Constructor
@@ -23,7 +27,7 @@ public class Biblioteca {
     public Biblioteca(String nombreBiblioteca, ArrayList<Libro> listaLibros, ArrayList<Persona> listaPersonal){
         this.nombreBiblioteca = nombreBiblioteca;
         this.libros = libros;
-        this.listaPersonal = listaPersonal;
+        this.personas = personas;
     }
 
     // Get y set
@@ -46,18 +50,22 @@ public class Biblioteca {
     }
 
     public ArrayList<Persona> getListaPersonal() {
-        return listaPersonal;
+        return personas;
     }
 
-    public void setListaPersonal(ArrayList<Persona> listaPersonal) {
-        this.listaPersonal = listaPersonal;
+    public void setListaPersonal(ArrayList<Persona> personas) {
+        this.personas = personas;
     }
+
+
+    // solicitarDatosPersona
+
 
     // constructor copia
     public Biblioteca(Biblioteca biblioteca){
         this.nombreBiblioteca = biblioteca.nombreBiblioteca;
         this.libros = biblioteca.libros;
-        this.listaPersonal = biblioteca.listaPersonal;
+        this.personas = biblioteca.personas;
     }
 
     public void mostrarLibros(ArrayList<Libro> libros){
@@ -83,7 +91,7 @@ public class Biblioteca {
         return "Biblioteca{" +
                 "nombreBiblioteca='" + nombreBiblioteca + '\'' +
                 ", libros=" + libros +
-                ", listaPersonal=" + listaPersonal +
+                ", listaPersonal=" + personas +
                 '}';
     }
 }

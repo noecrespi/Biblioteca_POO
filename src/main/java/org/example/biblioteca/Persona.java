@@ -1,10 +1,9 @@
 package org.example.biblioteca;
 
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
-
-public class Persona {
+public abstract class Persona {
 
     //Desarrolla la clase Persona. Se caracteriza por: nombre, apellido1, apellido2, edad. Crea constructor vacío,
     // todos los parámetros, copia, getters/setters y toString.
@@ -13,6 +12,9 @@ public class Persona {
     String apellido1;
     String apellido2;
     String edad;
+
+    ArrayList<Persona> personas = new ArrayList<Persona>();
+
 
     // Constructor
     //tiene tres constructores ya que la persona puede que no tenga segundo apellido
@@ -64,6 +66,16 @@ public class Persona {
         this.edad = edad;
     }
 
+    public void allPersonas(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios) {
+        personas.addAll(usuarios);
+        personas.addAll(bibliotecarios);
+    }
+
+    // Método para solicitar datos de una persona
+    //public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas){}
+
+
+    ;
     //Constructor copia
     public Persona(Persona persona){
         this.nombre = persona.nombre;
@@ -71,6 +83,12 @@ public class Persona {
         this.apellido2 = persona.apellido2;
         this.edad = persona.edad;
     }
+
+    // solicitar datos de la persona
+    public abstract void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas);
+
+    // solicitar datos de la persona
+    public abstract void solicitarDatosPersona();
 
     //to String
     @Override

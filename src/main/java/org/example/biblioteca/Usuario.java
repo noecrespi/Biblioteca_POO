@@ -1,6 +1,7 @@
 package org.example.biblioteca;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Usuario extends Persona {
     //Desarrolla la clase Usuario. Heredará los atributos anteriores, pero además deseamos almacenar su teléfono,
@@ -13,9 +14,17 @@ public class Usuario extends Persona {
     int codigoPostal;
     String correoElectronico;
     ArrayList<Reserva> reservas = new ArrayList<>();
+    ArrayList<Usuario> usuarios = new ArrayList<>();
 
     // Constructor
-    public Usuario(){};
+    public Usuario(){}
+
+    @Override
+    public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas) {
+
+    }
+
+    ;
 
     public Usuario(String nombre, String apellido1, String apellido2, String edad, int telefono, String direccion,
                     int codigoPostal, String correoElectronico){
@@ -33,6 +42,9 @@ public class Usuario extends Persona {
         this.codigoPostal = codigoPostal;
         this.correoElectronico = correoElectronico;
     }
+
+    // copiar la lista de usuarios
+
 
     // Get y set
     public int getTelefono() {
@@ -81,6 +93,52 @@ public class Usuario extends Persona {
         }else{
             return false;
         }
+    }
+
+    // solicitar datos de la persona
+    @Override
+    public  void solicitarDatosPersona(){
+        // crear persona
+        Usuario usuario = new Usuario();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce el nombre del usuario: ");
+        usuario.setNombre(sc.nextLine());
+
+        System.out.println("Introduce el primer apellido del usuario: ");
+        usuario.setApellido1(sc.nextLine());
+
+        System.out.println("Introduce el segundo apellido del usuario: ");
+        usuario.setApellido2(sc.nextLine());
+
+        System.out.println("Introduce la edad del usuario: ");
+        usuario.setEdad(sc.nextLine());
+
+        System.out.println("Introduce el teléfono del usuario: ");
+        usuario.setTelefono(sc.nextInt());
+
+        System.out.println("Introduce la dirección del usuario: ");
+        usuario.setDireccion(sc.nextLine());
+
+        System.out.println("Introduce el código postal del usuario: ");
+        usuario.setCodigoPostal(sc.nextInt());
+
+        System.out.println("Introduce el correo electrónico del usuario: ");
+        usuario.setCorreoElectronico(sc.nextLine());
+
+
+        // comprobar que el correo electrónico no esta repetido
+        for (Usuario newUsuario : usuarios) {
+            if (newUsuario.getCorreoElectronico().equals(this.getCorreoElectronico())){
+                System.out.println("El correo electrónico ya existe");
+                System.out.println("Introduce otro correo: ");
+                this.setCorreoElectronico(sc.nextLine());
+            }
+        }
+
+        // añadir usuario a la lista de usuarios
+        usuarios.add(usuario);
+        System.out.println("Usuario añadido correctamente");
     }
 
     //Constructor copia
