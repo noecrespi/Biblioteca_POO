@@ -87,6 +87,7 @@ public abstract class Persona {
     // solicitar datos de la persona
     public abstract void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas);
 
+
     // solicitar datos de la persona
     public abstract void solicitarDatosPersona();
 

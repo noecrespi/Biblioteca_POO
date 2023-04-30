@@ -2,6 +2,8 @@ package org.example.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Usuario extends Persona {
     //Desarrolla la clase Usuario. Heredará los atributos anteriores, pero además deseamos almacenar su teléfono,
@@ -13,6 +15,7 @@ public class Usuario extends Persona {
     String direccion;
     int codigoPostal;
     String correoElectronico;
+    String contrasenya;
     ArrayList<Reserva> reservas = new ArrayList<>();
     ArrayList<Usuario> usuarios = new ArrayList<>();
 
@@ -87,6 +90,12 @@ public class Usuario extends Persona {
         this.reservas = reservas;
     }
 
+    public String getContraCifrada() {
+        return IntStream.range(0, this.contrasenya.length())
+                .mapToObj(i -> "*")
+                .collect(Collectors.joining());
+    }
+
     public boolean isCorrectCP(int codigoPostal){
         if (String.valueOf(codigoPostal).length() == 5){
             return true;
@@ -94,6 +103,36 @@ public class Usuario extends Persona {
             return false;
         }
     }
+
+    public void setContrasenya(String contrasenya) {
+        this.contrasenya = contrasenya;
+    }
+
+    // Control de la contraseña
+    public static void controlContrasenya(String contrasenya) {
+        while (contrasenya.length() < 8) {
+            System.out.println("La contraseña debe tener al menos 8 caracteres.");
+            System.out.println("Introduce la contraseña del usuario: ");
+            Scanner sc = new Scanner(System.in);
+            contrasenya = sc.nextLine();
+        }
+    }
+
+    /*public static void eliminarUsuario(ArrayList<Usuario> usuarios, String deleteNif) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el NIF del usuario que quieres eliminar: ");
+        String nif = sc.nextLine();
+        //stream
+        usuarios.removeIf(usuario -> usuario.getNif().equals(nif));
+    }*/
+
+
+    public static void listUsuarios(ArrayList<Usuario> usuarios) {
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario);
+        }
+    }
+
 
     // solicitar datos de la persona
     @Override
