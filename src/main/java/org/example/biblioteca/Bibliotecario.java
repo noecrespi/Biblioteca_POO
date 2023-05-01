@@ -17,11 +17,6 @@ public class Bibliotecario extends Persona{
     // Constructor
     public Bibliotecario(){}
 
-    @Override
-    public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas) {
-
-    }
-
     public Bibliotecario(String nombre, String apellido1, String apellido2, String edad, String puestoTrabajo,
                          String NIF, String contrasena){
         super(nombre, apellido1, apellido2, edad);
@@ -35,6 +30,12 @@ public class Bibliotecario extends Persona{
         this.puestoTrabajo = puestoTrabajo;
         this.NIF = NIF;
         this.contrasena = contrasena;
+    }
+
+    public static void listBibliotecarios(ArrayList<Bibliotecario> bibliotecarios) {
+        for(Bibliotecario bibliotecario : bibliotecarios){
+            System.out.println(bibliotecario);
+        }
     }
 
     // get y set
@@ -63,39 +64,39 @@ public class Bibliotecario extends Persona{
         this.contrasena = contrasena;
     }
 
-    // solicitar datos de la persona
-    @Override
-    public  void solicitarDatosPersona(){
-        // crear persona
+    public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas) {
+        //creamos Bibliotecario
         Bibliotecario bibliotecario = new Bibliotecario();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Introduce el nombre del usuario: ");
+        //solicitamos datos
+        System.out.println("Introduce el nombre del bibliotecario");
         bibliotecario.setNombre(sc.nextLine());
 
-        System.out.println("Introduce el primer apellido del usuario: ");
+        System.out.println("Introduce el primer apellido del bibliotecario");
         bibliotecario.setApellido1(sc.nextLine());
 
-        System.out.println("Introduce el segundo apellido del usuario: ");
+        System.out.println("Introduce el segundo apellido del bibliotecario");
         bibliotecario.setApellido2(sc.nextLine());
 
-        System.out.println("Introduce la edad del usuario: ");
+        System.out.println("Introduce la edad del bibliotecario");
         bibliotecario.setEdad(sc.nextLine());
 
-        System.out.println("Introduce el teléfono del usuario: ");
+        System.out.println("Introduce el puesto de trabajo del bibliotecario");
         bibliotecario.setPuestoTrabajo(sc.nextLine());
 
-        System.out.println("Introduce la dirección del usuario: ");
+        System.out.println("Introduce el NIF del bibliotecario");
         bibliotecario.setNIF(sc.nextLine());
 
-        System.out.println("Introduce el código postal del usuario: ");
+        System.out.println("Introduce la contraseña del bibliotecario");
         bibliotecario.setContrasena(sc.nextLine());
 
-        // añadir usuario a la lista de usuarios
+        //añadimos bibliotecario a la lista de bibliotecarios
         bibliotecarios.add(bibliotecario);
-        System.out.println("Usuario añadido correctamente");
+        System.out.println("Bibliotecario añadido correctamente");
     }
 
+    // solicitar datos de la persona c
     // constructor copia
     public Bibliotecario(Bibliotecario bibliotecario){
         super(bibliotecario.getNombre(), bibliotecario.getApellido1(), bibliotecario.getApellido2(),
@@ -109,6 +110,10 @@ public class Bibliotecario extends Persona{
     @Override
     public String toString() {
         return "Bibliotecario{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", edad='" + edad + '\'' +
                 "puestoTrabajo='" + puestoTrabajo + '\'' +
                 ", NIF='" + NIF + '\'' +
                 ", contrasena='" + contrasena + '\'' +

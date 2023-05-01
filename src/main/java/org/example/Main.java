@@ -28,16 +28,18 @@ public class Main {
 
         while (salir) {
             do {
-                System.out.println("|     MENÚ BIBLIOTECA              |\n" +
+                System.out.println(
+                        "|     MENÚ BIBLIOTECA                               |\n" +
                         "\n" +
-                        "|     1. Libros                    |\n" +
-                        "|     2. Usuario                   |\n" +
-                        "|     3. Persona                   |\n" +
+                        "|     1. Libros                                     |\n" +
+                        "|     2. Usuario                                    |\n" +
+                        "|     3. Bibliotecario                              |\n" +
+                        "|     4. Mostrar todas las personas registradas     |\n" +
                         "\n" +
                         "|     0.Salir                      |\n");
 
                 opcion = sc.nextInt();
-            } while (opcion < 0 || opcion > 3);
+            } while (opcion < 0 || opcion > 4);
 
             switch (opcion) {
                 case 1:
@@ -50,7 +52,7 @@ public class Main {
                             "|     3.Buscar libro por ISBN      |\n" +
                             "|     4.Buscar libro por titulo    |\n" +
                             "|     5.Mostrar libros             |\n" +
-                            "|      6.Mostrar libros disponibles|\n" +
+                            "|     6.Mostrar libros disponibles |\n" +
                             "\n" +
                             "|     7.Volver al menú principal   |\n" +
                             "|     0.Salir                      |\n");
@@ -94,7 +96,6 @@ public class Main {
 
                                 |             USUARIO              |
                                 |     1. Crear usuario             |
-                                |     2. Eliminar usuario          |
                                 |     3. Lista de usuarios         |
 
                                 |     0.Salir                      |
@@ -105,15 +106,10 @@ public class Main {
                     switch (opcionUsuario) {
 
                         case 1:
-                            Usuario.solicitarDatosPersona(usuarios, bibliotecarios, personas);
+                            Usuario usuario = new Usuario();
+                            usuario.solicitarDatosPersona(usuarios, bibliotecarios, personas);
                             break;
                         case 2:
-                            Scanner sc3 = new Scanner(System.in);
-                            System.out.println("Introduce el dni de la persona que quieres eliminar");
-                            String deleteNif = sc3.nextLine();
-                            Usuario.eliminarUsuario(usuarios, deleteNif);
-                            break;
-                        case 3:
                             Usuario.listUsuarios(usuarios);
                             break;
                         case 0:
@@ -123,7 +119,43 @@ public class Main {
                     break;
                     }
                 case 3:
-                    // código para manejar opciones del menú de Usuario
+                    System.out.println("""
+                                |         MENÚ BIBLIOTECA          |
+
+                                |         BIBLIOTECARIO            |
+                                |     1. Crear bibliotecario       |
+                                |     2. Lista de bibliotecaris    |
+                                
+                                |     0.Salir                      |
+                                """);
+
+
+                    int opcionBibliotecario = sc.nextInt();
+                    //ArrayList<Persona> listaPersonal = biblioteca.getListaPersonal();
+                    switch (opcionBibliotecario) {
+                            case 1:
+                                Bibliotecario bibliotecario = new Bibliotecario();
+                                bibliotecario.solicitarDatosPersona(usuarios, bibliotecarios, personas);
+                                break;
+                            case 2:
+                                Bibliotecario.listBibliotecarios(bibliotecarios);
+                                break;
+                            case 0:
+                                break;
+                            default:
+                                System.out.println("Opción incorrecta");
+                                break;
+                    }
+                        break;
+
+                case 4:
+                    System.out.println("Lista de personas registradas");
+                    //crear un usuario y un bibliotecario
+                    Usuario usuario1 = new Usuario("Paco", "C", "P", "12", 648, "direccion", 28030 ,"mail");
+                    Bibliotecario bibliotecario1 = new Bibliotecario("julio", "C", "P", "12", "direccion", "28023330" ,"contraseña");
+                    //Persona persona = new Persona();
+                    Persona.allPersonas(usuarios, bibliotecarios, personas, usuario1, bibliotecario1);
+                    Persona.printPersonas(personas);
                     break;
                 case 0:
                     salir = false;

@@ -22,12 +22,6 @@ public class Usuario extends Persona {
     // Constructor
     public Usuario(){}
 
-    @Override
-    public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas) {
-
-    }
-
-    ;
 
     public Usuario(String nombre, String apellido1, String apellido2, String edad, int telefono, String direccion,
                     int codigoPostal, String correoElectronico){
@@ -135,8 +129,8 @@ public class Usuario extends Persona {
 
 
     // solicitar datos de la persona
-    @Override
-    public  void solicitarDatosPersona(){
+
+    public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas){
         // crear persona
         Usuario usuario = new Usuario();
         Scanner sc = new Scanner(System.in);
@@ -154,24 +148,26 @@ public class Usuario extends Persona {
         usuario.setEdad(sc.nextLine());
 
         System.out.println("Introduce el teléfono del usuario: ");
-        usuario.setTelefono(sc.nextInt());
+        usuario.setTelefono(Integer.parseInt(sc.nextLine()));
 
         System.out.println("Introduce la dirección del usuario: ");
         usuario.setDireccion(sc.nextLine());
 
         System.out.println("Introduce el código postal del usuario: ");
-        usuario.setCodigoPostal(sc.nextInt());
+        usuario.setCodigoPostal(Integer.parseInt(sc.nextLine()));
 
         System.out.println("Introduce el correo electrónico del usuario: ");
         usuario.setCorreoElectronico(sc.nextLine());
 
 
         // comprobar que el correo electrónico no esta repetido
-        for (Usuario newUsuario : usuarios) {
-            if (newUsuario.getCorreoElectronico().equals(this.getCorreoElectronico())){
-                System.out.println("El correo electrónico ya existe");
-                System.out.println("Introduce otro correo: ");
-                this.setCorreoElectronico(sc.nextLine());
+        boolean correoRepetido = false;
+        for (Usuario usuario1 : usuarios) {
+            if (usuario1.getCorreoElectronico().equals(usuario.getCorreoElectronico())) {
+                correoRepetido = true;
+                System.out.println("El correo electrónico ya está registrado.");
+                System.out.println("Introduce el correo electrónico del usuario: ");
+                usuario.setCorreoElectronico(sc.nextLine());
             }
         }
 

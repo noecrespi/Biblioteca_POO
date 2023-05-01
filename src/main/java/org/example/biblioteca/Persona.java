@@ -3,7 +3,7 @@ package org.example.biblioteca;
 
 import java.util.ArrayList;
 
-public abstract class Persona {
+public class Persona {
 
     //Desarrolla la clase Persona. Se caracteriza por: nombre, apellido1, apellido2, edad. Crea constructor vacío,
     // todos los parámetros, copia, getters/setters y toString.
@@ -13,7 +13,8 @@ public abstract class Persona {
     String apellido2;
     String edad;
 
-    ArrayList<Persona> personas = new ArrayList<Persona>();
+    static ArrayList<Persona> personas = new ArrayList<Persona>();
+
 
 
     // Constructor
@@ -66,16 +67,19 @@ public abstract class Persona {
         this.edad = edad;
     }
 
-    public void allPersonas(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios) {
+    public static void allPersonas(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas,Usuario usuario1,Bibliotecario bibliotecario1) {
+        // para cada usuario a personas
+        // añadir usuario a personas
+        personas.add(usuario1);
+        personas.add(bibliotecario1);
         personas.addAll(usuarios);
         personas.addAll(bibliotecarios);
     }
+    //imptimir todos las personas
+    public static void printPersonas(ArrayList<Persona> personas){
+        personas.forEach(System.out::println);
+    }
 
-    // Método para solicitar datos de una persona
-    //public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas){}
-
-
-    ;
     //Constructor copia
     public Persona(Persona persona){
         this.nombre = persona.nombre;
@@ -85,11 +89,14 @@ public abstract class Persona {
     }
 
     // solicitar datos de la persona
-    public abstract void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas);
+
+    public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas) {
+
+    }
 
 
     // solicitar datos de la persona
-    public abstract void solicitarDatosPersona();
+    //public abstract void solicitarDatosPersona();
 
     //to String
     @Override
