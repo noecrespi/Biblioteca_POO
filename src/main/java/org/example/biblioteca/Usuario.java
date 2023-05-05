@@ -11,13 +11,13 @@ public class Usuario extends Persona {
     // (incluidos los de la superclase), copia, getters/setters y toString (que imprimirá también los datos de la
     // superclase).
 
-    int telefono;
+    static int telefono;
     String direccion;
     int codigoPostal;
     String correoElectronico;
     String contrasenya;
     ArrayList<Reserva> reservas = new ArrayList<>();
-    ArrayList<Usuario> usuarios = new ArrayList<>();
+
 
     // Constructor
     public Usuario(){}
@@ -175,6 +175,7 @@ public class Usuario extends Persona {
         usuarios.add(usuario);
         System.out.println("Usuario añadido correctamente");
     }
+
 
     //Constructor copia
     public Usuario(Usuario usuario){

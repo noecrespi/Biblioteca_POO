@@ -14,6 +14,7 @@ public class Bibliotecario extends Persona{
 
     ArrayList<Bibliotecario> bibliotecarios = new ArrayList<>();
 
+
     // Constructor
     public Bibliotecario(){}
 
@@ -96,7 +97,58 @@ public class Bibliotecario extends Persona{
         System.out.println("Bibliotecario añadido correctamente");
     }
 
-    // solicitar datos de la persona c
+    //iniciar sesion
+    //Nuestro sistema debe dar soporte para realizar reservas y devolver libros. Las reservas las realiza únicamente un bibliotecario, que previamente ha realizado el login (NIF+contraseña),
+    public static void iniciarSesion(ArrayList<Bibliotecario> bibliotecarios) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce tu NIF");
+        String NIF = sc.nextLine();
+        System.out.println("Introduce tu contraseña");
+        String contrasena = sc.nextLine();
+
+        for(Bibliotecario bibliotecario : bibliotecarios){
+            if(bibliotecario.getNIF().equals(NIF) && bibliotecario.getContrasena().equals(contrasena)){
+                System.out.println("Bienvenido " + bibliotecario.getNombre());
+                System.out.println("¿Que quiere reservar un libro o devolverlo?\n +" +
+                        "1. Reservar\n " +
+                        "2. Devolver");
+                return;
+            }
+        }
+        System.out.println("Usuario o contraseña es incorrecta");
+    }
+
+    //reservar libro
+    // El método reservarLibro, pedirá al usuario el teléfono y el correo electrónico, si coincide, le permitirá
+    // realizar la reserva, y por tanto, solicitará el ISBN del libro, y en consecuencia quedará completa la información
+    //de la reserva (revisa la clase Reserva). Debes tener en cuenta que debes actualizar la clase Libro, con la
+    // información de libros disponibles, y obviamente se debe tener en cuenta que no podrá reservar si no hay unidades
+    // disponibles.
+
+    public static void reservarLibro(ArrayList<Libro> libros, ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Reserva> reservas) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el numero de telefono del usuario");
+        int telefono = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el correo electronico del usuario");
+        String correo = sc.nextLine();
+
+        //comprobamos que el usuario existe
+
+        boolean existe = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCorreoElectronico().equals(correo) && usuario.getTelefono() == telefono) {
+                existe = true;
+            } else {
+                System.out.println("El usuario no existe, el correo o el telefono no coinciden o no existe");
+            }
+        }
+        // llamamos al metodo de la clase reserva
+        if (existe) {
+            Reserva.addReserva(libros, usuarios, bibliotecarios, reservas);
+        }
+    }
+
     // constructor copia
     public Bibliotecario(Bibliotecario bibliotecario){
         super(bibliotecario.getNombre(), bibliotecario.getApellido1(), bibliotecario.getApellido2(),

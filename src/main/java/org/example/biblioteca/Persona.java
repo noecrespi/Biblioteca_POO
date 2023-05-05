@@ -94,10 +94,6 @@ public class Persona {
 
     }
 
-
-    // solicitar datos de la persona
-    //public abstract void solicitarDatosPersona();
-
     //to String
     @Override
     public String toString() {
@@ -108,7 +104,5 @@ public class Persona {
                 ", edad='" + edad + '\'' +
                 '}';
     }
-
-
 
 }

@@ -2,6 +2,8 @@ package org.example.biblioteca;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Reserva {
 
@@ -10,6 +12,8 @@ public class Reserva {
     String Libro;
     LocalDate fecha;
     LocalTime hora;
+
+    static ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
     // Constructor
     public Reserva(){};
@@ -47,6 +51,39 @@ public class Reserva {
         this.hora = LocalTime.now();
     }
 
+    int ISBN;
+    //reservar un libro
+    public static void addReserva( ArrayList<Libro> libros,ArrayList<Usuario> usuarios,ArrayList<Bibliotecario> bibliotecarios, ArrayList<Reserva> reservas){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce el ISBN del libro que quieres reservar");
+        int ISBN = Integer.parseInt(sc.nextLine());
+        isLibro(libros, ISBN);
+
+        Reserva reserva = new Reserva();
+        libros.stream().filter(libro1 -> libro1.getIBNS() == ISBN).forEach(libro1 -> reserva.setLibro(libro1.getTitulo()));
+        reserva.setFecha(LocalDate.now());
+        reserva.setHora(LocalTime.now());
+        reservas.add(reserva);
+
+        // modificar los libros disponibles
+        libros.stream().filter(libro1 -> libro1.getIBNS() == ISBN).forEach(libro1 -> libro1.setlibrosDisponibles(libro1.getlibrosDisponibles() - 1));
+    }
+
+    //comprobar si existe el libro
+    public static boolean isLibro(ArrayList<Libro> libros, int ISBN){
+        boolean existeLibro = false;
+        for (Libro libro : libros) {
+            if (libro.getIBNS() == ISBN) {
+                existeLibro = true;
+            } else {
+                System.out.println("El libro no existe");
+                existeLibro = false;
+            }
+        }
+        return existeLibro;
+    }
+
     // To String
     @Override
     public String toString() {
@@ -56,4 +93,5 @@ public class Reserva {
                 ", hora=" + hora +
                 '}';
     }
+
 }

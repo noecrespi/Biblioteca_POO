@@ -125,6 +125,7 @@ public class Main {
                                 |         BIBLIOTECARIO            |
                                 |     1. Crear bibliotecario       |
                                 |     2. Lista de bibliotecaris    |
+                                |     3. Iniciar sesión            |
                                 
                                 |     0.Salir                      |
                                 """);
@@ -140,15 +141,16 @@ public class Main {
                             case 2:
                                 Bibliotecario.listBibliotecarios(bibliotecarios);
                                 break;
+                            case 3:
+                                Bibliotecario.iniciarSesion(bibliotecarios);
+                                break;
                             case 0:
                                 break;
                             default:
                                 System.out.println("Opción incorrecta");
                                 break;
                     }
-                        break;
-
-                case 4:
+                        break;                case 4:
                     System.out.println("Lista de personas registradas");
                     //crear un usuario y un bibliotecario
                     Usuario usuario1 = new Usuario("Paco", "C", "P", "12", 648, "direccion", 28030 ,"mail");
