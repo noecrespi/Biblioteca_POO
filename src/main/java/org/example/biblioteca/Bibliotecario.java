@@ -15,6 +15,8 @@ public class Bibliotecario extends Persona{
     ArrayList<Bibliotecario> bibliotecarios = new ArrayList<>();
 
 
+
+
     // Constructor
     public Bibliotecario(){}
 
@@ -99,7 +101,7 @@ public class Bibliotecario extends Persona{
 
     //iniciar sesion
     //Nuestro sistema debe dar soporte para realizar reservas y devolver libros. Las reservas las realiza únicamente un bibliotecario, que previamente ha realizado el login (NIF+contraseña),
-    public static void iniciarSesion(ArrayList<Bibliotecario> bibliotecarios) {
+    public static void iniciarSesion(ArrayList<Bibliotecario> bibliotecarios, ArrayList<Libro> libros, ArrayList<Usuario> usuarios, ArrayList<Reserva> reservas) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce tu NIF");
         String NIF = sc.nextLine();
@@ -108,14 +110,30 @@ public class Bibliotecario extends Persona{
 
         for(Bibliotecario bibliotecario : bibliotecarios){
             if(bibliotecario.getNIF().equals(NIF) && bibliotecario.getContrasena().equals(contrasena)){
+
                 System.out.println("Bienvenido " + bibliotecario.getNombre());
-                System.out.println("¿Que quiere reservar un libro o devolverlo?\n +" +
-                        "1. Reservar\n " +
-                        "2. Devolver");
-                return;
+                System.out.println("""
+                        ¿Que quiere reservar un libro o devolverlo?
+                         1. Reservar
+                         2. Devolver
+                         3. Añadir una copia de libro
+                         """);
+                if (sc.nextLine().equals("1")) {
+                    Bibliotecario.reservarLibro(libros, usuarios, bibliotecarios, reservas);
+
+                } else if (sc.nextLine().equals("2")) {
+                    Bibliotecario.devolverLibro(libros, usuarios, bibliotecarios, reservas);
+
+                } else if (sc.nextLine().equals("3")){
+                    //añadir libro copia
+
+                } else {
+                    System.out.println("Opcion incorrecta");
+                }
+            } else {
+                System.out.println("Usuario o contraseña es incorrecta");
             }
         }
-        System.out.println("Usuario o contraseña es incorrecta");
     }
 
     //reservar libro
@@ -148,6 +166,33 @@ public class Bibliotecario extends Persona{
             Reserva.addReserva(libros, usuarios, bibliotecarios, reservas);
         }
     }
+
+    // devolver libro
+    public static void devolverLibro(ArrayList<Libro> libros, ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Reserva> reservas) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce el numero de telefono del usuario");
+        int telefono = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el correo electronico del usuario");
+        String correo = sc.nextLine();
+
+        //comprobamos que el usuario existe
+
+        boolean existe = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCorreoElectronico().equals(correo) && usuario.getTelefono() == telefono) {
+                existe = true;
+            } else {
+                System.out.println("El usuario no existe, el correo o el telefono no coinciden o no existe");
+            }
+        }
+        // llamamos al metodo de la clase reserva
+        if (existe) {
+            Reserva.devolverLibro(libros, usuarios, bibliotecarios, reservas);
+        }
+    }
+
+
+
 
     // constructor copia
     public Bibliotecario(Bibliotecario bibliotecario){

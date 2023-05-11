@@ -68,6 +68,7 @@ public class Reserva {
 
         // modificar los libros disponibles
         libros.stream().filter(libro1 -> libro1.getIBNS() == ISBN).forEach(libro1 -> libro1.setlibrosDisponibles(libro1.getlibrosDisponibles() - 1));
+        //
     }
 
     //comprobar si existe el libro
@@ -82,6 +83,22 @@ public class Reserva {
             }
         }
         return existeLibro;
+    }
+    public static void devolverLibro(ArrayList<Libro> libros,ArrayList<Usuario> usuarios,ArrayList<Bibliotecario> bibliotecarios, ArrayList<Reserva> reservas){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce el ISBN del libro que quieres reservar");
+        int ISBN = Integer.parseInt(sc.nextLine());
+        isLibro(libros, ISBN);
+
+        Reserva reserva = new Reserva();
+        libros.stream().filter(libro1 -> libro1.getIBNS() == ISBN).forEach(libro1 -> reserva.setLibro(libro1.getTitulo()));
+        reserva.setFecha(LocalDate.now());
+        reserva.setHora(LocalTime.now());
+        reservas.add(reserva);
+
+        // modificar los libros disponibles
+        libros.stream().filter(libro1 -> libro1.getIBNS() == ISBN).forEach(libro1 -> libro1.setlibrosDisponibles(libro1.getlibrosDisponibles() + 1));
     }
 
     // To String
