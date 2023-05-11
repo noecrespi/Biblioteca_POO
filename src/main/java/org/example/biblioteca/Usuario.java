@@ -15,7 +15,7 @@ public class Usuario extends Persona {
     String direccion;
     int codigoPostal;
     String correoElectronico;
-    String contrasenya;
+    private String contrasenya;
     ArrayList<Reserva> reservas = new ArrayList<>();
 
 
@@ -129,7 +129,6 @@ public class Usuario extends Persona {
 
 
     // solicitar datos de la persona
-
     public void solicitarDatosPersona(ArrayList<Usuario> usuarios, ArrayList<Bibliotecario> bibliotecarios, ArrayList<Persona> personas){
         // crear persona
         Usuario usuario = new Usuario();
@@ -176,6 +175,27 @@ public class Usuario extends Persona {
         System.out.println("Usuario añadido correctamente");
     }
 
+    //añadir y cambiar contraseña
+    public static void changePassword(ArrayList<Usuario> usuarios){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce el telefono del usuario: ");
+        int telefono = Integer.parseInt(sc.nextLine());
+        System.out.println("Introduce el mail del usuario: ");
+        String correoElectronico = sc.nextLine();
+
+        for(Usuario usuario : usuarios){
+            if(usuario.getTelefono() == telefono && usuario.getCorreoElectronico().equals(correoElectronico)){
+                System.out.println("Introduce la nueva contraseña: ");
+                String contrasenya = sc.nextLine();
+                controlContrasenya(contrasenya);
+                usuario.setContrasenya(contrasenya);
+                System.out.println("Contraseña cambiada correctamente.");
+            }
+        }
+    }
+
+
 
     //Constructor copia
     public Usuario(Usuario usuario){
@@ -202,6 +222,7 @@ public class Usuario extends Persona {
                 ", direccion='" + direccion + '\'' +
                 ", codigoPostal=" + codigoPostal +
                 ", correoElectronico='" + correoElectronico + '\'' +
+                ", contraseña='" + getContraCifrada() + '\'' +
                 ", reservas=" + reservas +
                 '}';
     }

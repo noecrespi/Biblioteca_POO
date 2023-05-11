@@ -2,8 +2,9 @@ package org.example.biblioteca;
 
 
 import java.util.ArrayList;
-
-public class Persona {
+// si creamos la clase abstracta persona, no podemos instanciarla.
+// la parte positivo es que controlamos que solo existan bibliotecarios y usuarios.
+public abstract class Persona {
 
     //Desarrolla la clase Persona. Se caracteriza por: nombre, apellido1, apellido2, edad. Crea constructor vacío,
     // todos los parámetros, copia, getters/setters y toString.
@@ -13,7 +14,7 @@ public class Persona {
     String apellido2;
     String edad;
 
-    static ArrayList<Persona> personas = new ArrayList<Persona>();
+    //static ArrayList<Persona> personas = new ArrayList<Persona>();
 
 
 

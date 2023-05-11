@@ -10,10 +10,11 @@ public class Bibliotecario extends Persona{
 
     String puestoTrabajo;
     String NIF;
-    String contrasena;
+    static String contrasena;
 
     ArrayList<Bibliotecario> bibliotecarios = new ArrayList<>();
-
+    // crear lista de personas ya que el biblioteracio tiene que poder ver la lista de usuarios y de bibliotecarios
+    ArrayList<Persona> personas = new ArrayList<>();
 
 
 
@@ -105,29 +106,37 @@ public class Bibliotecario extends Persona{
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduce tu NIF");
         String NIF = sc.nextLine();
+
         System.out.println("Introduce tu contraseña");
         String contrasena = sc.nextLine();
 
+
         for(Bibliotecario bibliotecario : bibliotecarios){
             if(bibliotecario.getNIF().equals(NIF) && bibliotecario.getContrasena().equals(contrasena)){
-
+                String contrasenaNormal = bibliotecario.getContrasena();
                 System.out.println("Bienvenido " + bibliotecario.getNombre());
                 System.out.println("""
                         ¿Que quiere reservar un libro o devolverlo?
                          1. Reservar
                          2. Devolver
                          3. Añadir una copia de libro
+                         4. Cambiar contraseña
                          """);
-                if (sc.nextLine().equals("1")) {
+                String opcion = sc.nextLine();
+                if (opcion.equals("1")) {
                     Bibliotecario.reservarLibro(libros, usuarios, bibliotecarios, reservas);
 
-                } else if (sc.nextLine().equals("2")) {
+                } else if (opcion.equals("2")) {
                     Bibliotecario.devolverLibro(libros, usuarios, bibliotecarios, reservas);
 
-                } else if (sc.nextLine().equals("3")){
+                } else if (opcion.equals("3")){
                     //añadir libro copia
+                    Bibliotecario.changePassword(bibliotecarios, libros, usuarios, reservas, contrasenaNormal);
 
-                } else {
+                }else if (opcion.equals("4")){
+                    //Bibliotecario.changePassword(bibliotecarios, contrasenaNormal);
+                }
+                else {
                     System.out.println("Opcion incorrecta");
                 }
             } else {
@@ -191,6 +200,32 @@ public class Bibliotecario extends Persona{
         }
     }
 
+    // añadir libro copia
+    //El método añadirLibroCopia. Este método añade un libro a partir de la información de otro, para ello pedirá al
+    // usuario el libro origen y el libro destino, y qué dato quiere modificar de los datos del libro origen. Objetivo,
+    // que utilicéis el constructor copia.
+    // HACER
+
+    // cambiar contraseña
+public static void changePassword(ArrayList<Bibliotecario> bibliotecarios, ArrayList<Libro> libros, ArrayList<Usuario> usuarios, ArrayList<Reserva> reservas, String contrasenaNormal) {Scanner sc = new Scanner(System.in);
+    System.out.println("Introduce la nueva contraseña");
+    String newPassword = sc.nextLine();
+    System.out.println("Vuelve a introducir la nueva contraseña");
+    String newPassword2 = sc.nextLine();
+
+    if (newPassword.equals(newPassword2)) {
+        for (Bibliotecario bibliotecario : bibliotecarios) {
+            if (bibliotecario.getContrasena().equals(contrasenaNormal)) {
+                bibliotecario.setContrasena(newPassword);
+                System.out.println("Contraseña cambiada correctamente");
+                break; // no es necesario verificar el resto de la lista
+            }
+        }
+    } else {
+        System.out.println("Las contraseñas no coinciden");
+    }
+
+    }
 
 
 

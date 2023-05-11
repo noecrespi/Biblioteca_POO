@@ -111,7 +111,8 @@ public class Main {
                                 |             USUARIO              |
                                 |     1. Crear usuario             |
                                 |     2. Lista de usuarios         |
-                                |     3. Salir del menu            |
+                                |     3. Añadir o cambiar contraseña |
+                                |     4. Salir del menu            |
                                 
 
                                 |     0.Salir                      |
@@ -129,9 +130,12 @@ public class Main {
                                 Usuario.listUsuarios(usuarios);
                                 break;
                             case 3:
-                                salirMenu = false;
+                                Usuario.changePassword(usuarios);
                                 //salir = false;
                                 break;
+                                case 4:
+                                    salirMenu = false;
+                                    break;
                             case 0:
                                 break;
                             default:
