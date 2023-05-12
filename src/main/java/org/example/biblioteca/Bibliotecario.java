@@ -119,8 +119,8 @@ public class Bibliotecario extends Persona{
                         ¿Que quiere reservar un libro o devolverlo?
                          1. Reservar
                          2. Devolver
-                         3. Añadir una copia de libro
-                         4. Cambiar contraseña
+                         3. Cambiar contraseña
+                         4. Añadir una copia de libro
                          """);
                 String opcion = sc.nextLine();
                 if (opcion.equals("1")) {
@@ -224,7 +224,6 @@ public static void changePassword(ArrayList<Bibliotecario> bibliotecarios, Array
     } else {
         System.out.println("Las contraseñas no coinciden");
     }
-
     }
 
 

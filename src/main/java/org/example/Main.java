@@ -187,8 +187,6 @@ public class Main {
 
                     case 4:
                         System.out.println("Lista de personas registradas");
-                        //crear un usuario y un bibliotecario
-                        //Persona persona = new Persona();
 
                         //añadirlos a la lista de personas
                         Persona.allPersonas(usuarios, bibliotecarios, personas, usuario1, bibliotecario1);

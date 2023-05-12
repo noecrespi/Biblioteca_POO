@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Reserva {
+public class Reserva implements Material{
 
     //Desarrolla la clase Reserva. Se caracteriza por: tener un Libro, fecha y hora de la reserva. Crea constructor
     //vacío, todos los parámetros, copia, getters/setters y toString.
@@ -111,4 +111,15 @@ public class Reserva {
                 '}';
     }
 
+    @Override
+    public LocalDate obtenerFechaDevolucion() {
+        LocalDate fechaActual = LocalDate.now();
+        return fechaActual.plusMonths(1);
+    }
+
+    @Override
+    public String mostrarInfoChula() {
+        String msg = "Libro: " + Libro + " Fecha: " + fecha + " Hora: " + hora;
+        return msg;
+    }
 }

@@ -15,7 +15,7 @@ public class Usuario extends Persona {
     String direccion;
     int codigoPostal;
     String correoElectronico;
-    private String contrasenya;
+    private String contrasenya ="";
     ArrayList<Reserva> reservas = new ArrayList<>();
 
 
@@ -213,7 +213,7 @@ public class Usuario extends Persona {
     //toString
     @Override
     public String toString() {
-        return "Usuario{" +
+        return super.toString() +"Usuario{" +
                 "nombre='" + nombre + '\'' +
                 ", apellido1='" + apellido1 + '\'' +
                 ", apellido2='" + apellido2 + '\'' +
